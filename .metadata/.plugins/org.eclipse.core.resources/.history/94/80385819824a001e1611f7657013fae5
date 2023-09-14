@@ -1,0 +1,42 @@
+package com.example.Camel.Router;
+
+import org.apache.camel.builder.RouteBuilder;
+import org.springframework.stereotype.Component;
+
+import com.example.Camel.processor.ProcessorData;
+
+@Component
+public class RoutesData extends RouteBuilder {
+
+    @Override
+    public void configure() throws Exception {
+    	from("jetty:http://0.0.0.0:8080/api/wakeup?httpMethodRestrict=GET")
+        .transform().constant("Application is awake!");
+        
+        // Create operation - Insert a new Generalingo document into MongoDB
+    	from("direct:createGeneralingo")
+    	.process(new ProcessorData())
+        .to("mongodb:myinfo?database=Assign&collection=info&operation=insert");
+ 
+        // Read operation - Retrieve a Generalingo document by ID from MongoDB
+        from("direct:getGeneralingo")
+            .setHeader("CamelMongoDbCriteriaId").simple("${header.id}")
+            .to("mongodb:myinfo?database=Assign&collection=info&operation=findOneByQuery");
+
+        // Update operation - Update a Generalingo document by ID in MongoDB
+        from("direct:updateGeneralingo")
+            .setHeader("CamelMongoDbCriteriaId").simple("${header.id}")
+            .to("mongodb:myinfo?database=Assign&collection=info&operation=update");
+
+        // Delete operation - Delete a Generalingo document by ID from MongoDB
+        from("direct:deleteGeneralingo")
+            .setHeader("CamelMongoDbCriteriaId").simple("${header.id}")
+            .to("mongodb:myinfo?database=Assign&collection=info&operation=remove");
+        
+        // Hit an external API and log the response
+        from("direct:callExternalApi")
+            .setHeader("CamelHttpMethod", constant("GET"))
+            .to("http://api.example.com/some-endpoint")
+            .log("Response from external API: ${body}");
+    }
+}

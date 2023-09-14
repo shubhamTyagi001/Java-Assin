@@ -1,0 +1,45 @@
+package com.example.Camel.Router;
+
+import org.apache.camel.builder.RouteBuilder;
+import org.springframework.stereotype.Component;
+
+import com.example.Camel.processor.ProcessorData;
+
+@Component
+public class RoutesData extends RouteBuilder {
+
+    @Override
+    public void configure() throws Exception {
+    	
+    	 rest("/generalingo")
+         .post("/create")
+             .to("direct:createGeneralingo")
+         .get("/{id}")
+             .to("direct:getGeneralingo")
+         .put("/{id}")
+             .to("direct:updateGeneralingo")
+         .delete("/{id}")
+             .to("direct:deleteGeneralingo");
+      
+    	from("direct:createGeneralingo")
+    	.process(new ProcessorData())
+        .to("mongodb:myinfo?database=Assign&collection=info&operation=insert");
+ 
+        
+        from("direct:getGeneralingo")
+            .setHeader("CamelMongoDbCriteriaId").simple("${header.id}")
+            .to("mongodb:myinfo?database=Assign&collection=info&operation=findOneByQuery");
+
+       
+        from("direct:updateGeneralingo")
+            .setHeader("CamelMongoDbCriteriaId").simple("${header.id}")
+            .to("mongodb:myinfo?database=Assign&collection=info&operation=update");
+
+
+        from("direct:deleteGeneralingo")
+            .setHeader("CamelMongoDbCriteriaId").simple("${header.id}")
+            .to("mongodb:myinfo?database=Assign&collection=info&operation=remove");
+        
+
+    }
+}

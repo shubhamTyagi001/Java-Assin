@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="org.apache.camel.Processor"/>
+    <fullyQualifiedTypeName name="org.springframework.data.mongodb.repository.MongoRepository"/>
+    <fullyQualifiedTypeName name="com.example.CamelModel.Generalingo"/>
+    <fullyQualifiedTypeName name="com.example.Camel.processor.ProcessorData"/>
+    <fullyQualifiedTypeName name="com.javatechie.spring.mongo.api.model.Book"/>
+    <fullyQualifiedTypeName name="com.javatechie.spring.mongo.api.repository.BookRepository"/>
+    <fullyQualifiedTypeName name="lombok.Getter"/>
+    <fullyQualifiedTypeName name="lombok.Setter"/>
+    <fullyQualifiedTypeName name="lombok.ToString"/>
+    <fullyQualifiedTypeName name="org.springframework.data.mongodb.core.mapping.Document"/>
+    <fullyQualifiedTypeName name="org.springframework.data.annotation.Id"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestController"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
+    <fullyQualifiedTypeName name="org.apache.camel.builder.RouteBuilder"/>
+    <fullyQualifiedTypeName name="org.apache.camel.spi.RestConfiguration.RestBindingMode"/>
+    <fullyQualifiedTypeName name="org.apache.camel.model.rest.RestBindingMode"/>
+    <fullyQualifiedTypeName name="com.example.demo.model.Book"/>
+</qualifiedTypeNameHistroy>

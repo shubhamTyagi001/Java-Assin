@@ -1,0 +1,10 @@
+package com.example.Camel;
+@RestController
+public class Controller {
+    @PostMapping("/createGeneralingo")
+    public ResponseEntity<?> createGeneralingo(@RequestBody Generalingo generalingo) {
+        // Your logic to create a Generalingo document
+        return ResponseEntity.ok("Generalingo created successfully");
+    }
+
+}
